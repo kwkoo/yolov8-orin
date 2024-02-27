@@ -1,0 +1,15 @@
+#!/bin/bash
+
+IMAGE=ghcr.io/kwkoo/yolov8-orin
+
+podman run \
+  --rm \
+  -it \
+  --name yolo \
+  --device /dev/video0 \
+  -p 8080:8080 \
+  --runtime /usr/bin/nvidia-container-runtime \
+  --group-add keep-groups \
+  --security-opt label=disable \
+  --env NVIDIA_DRIVER_CAPABILITIES=all \
+  $IMAGE
